@@ -1,0 +1,59 @@
+package org.polibiznes;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyEvent;
+
+
+public class MainMenu extends Scennable {
+
+    String[][] options = {{"Nowa gra", "Dołącz do gry", "Info", "Wyjdź"}, {"> Nowa gra <", "> Dołącz do gry <", "> Info <", "> Wyjdź <"}};
+    int selectedOption = 0;
+
+    public MainMenu(int windowWidth, int windowHeight) {
+        super(windowWidth, windowHeight);
+    }
+
+    public void update(KeyboardHandler keyboardHandler) {
+        if (keyboardHandler.isKeyPressed(KeyEvent.VK_UP)) {
+            selectedOption = (selectedOption + 3) % 4;
+        }
+
+        if (keyboardHandler.isKeyPressed(KeyEvent.VK_DOWN)) {
+            selectedOption = (selectedOption + 1) % 4;
+        }
+
+        if (keyboardHandler.isKeyPressed(KeyEvent.VK_ENTER)) {
+            switch (selectedOption) {
+                case 0:
+                    SceneManager.changeScene(Scenes.NEW_GAME_MENU);
+                    break;
+                case 1:
+                    SceneManager.changeScene(Scenes.LOAD_GAME_MENU);
+                    break;
+                case 2:
+                    SceneManager.changeScene(Scenes.INFO);
+                    break;
+                case 3:
+                    System.exit(0);
+                    break;
+            }
+        }
+    }
+
+    public void render(Graphics2D g2d) {
+        g2d.setColor(Color.PINK);
+        font = new Font("Arial", Font.BOLD, 65);
+        g2d.setFont(font);
+        metrics = g2d.getFontMetrics(font);
+        g2d.drawString("Polibiznes", windowWidth / 2 - metrics.stringWidth("Polibiznes") / 2, windowHeight / 4);
+
+        g2d.setColor(Color.LIGHT_GRAY);
+        font = new Font("Arial", Font.BOLD, 35);
+        g2d.setFont(font);
+        metrics = g2d.getFontMetrics(font);
+        for (int i = 0; i < options[0].length; i++) {
+            g2d.drawString(options[i == selectedOption ? 1 : 0][i], windowWidth / 2 - metrics.stringWidth(options[i == selectedOption ? 1 : 0][i]) / 2, windowHeight / 2 + i * 75);
+        }
+    }
+}

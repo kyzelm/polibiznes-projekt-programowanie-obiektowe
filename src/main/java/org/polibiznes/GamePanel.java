@@ -1,21 +1,31 @@
 package org.polibiznes;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class GamePanel extends JPanel implements Runnable {
 
-    final int FPS = 60;
+    final static int WIDTH = 1200;
+    final static int HEIGHT = 800;
+
+    final int FPS = 144;
+
+    private Image bg = ImageIO.read(new File("src/main/resources/bg.jpg"));
 
     KeyboardHandler keyboardHandler = new KeyboardHandler();
     Thread gameThread;
 
-    int x = 100;
-    int y = 100;
+    MainMenu mainMenu = new MainMenu(WIDTH, HEIGHT);
+    Info info = new Info(WIDTH, HEIGHT);
 
-    public GamePanel() {
-        this.setPreferredSize(new java.awt.Dimension(800, 600));
-        this.setBackground(java.awt.Color.BLACK);
+    public GamePanel() throws IOException, FontFormatException {
+        PacketManager.connect("localhost", 2137);
+
+        this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyboardHandler);
         this.setFocusable(true);
@@ -43,6 +53,7 @@ public class GamePanel extends JPanel implements Runnable {
 
             if (delta >= 1) {
                 update();
+                keyboardHandler.resetKeys();
                 repaint();
                 delta--;
                 drawCount++;
@@ -57,18 +68,46 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        x += keyboardHandler.right - keyboardHandler.left;
-        y += keyboardHandler.down - keyboardHandler.up;
+        switch (SceneManager.getCurrentScene()) {
+            case MAIN_MENU:
+                mainMenu.update(keyboardHandler);
+                break;
+            case INFO:
+                info.update(keyboardHandler);
+                break;
+            case NEW_GAME_MENU:
+                break;
+            case LOAD_GAME_MENU:
+                break;
+            case GAME:
+                break;
+            case GAME_OVER:
+                break;
+        }
     }
 
     @Override
-    public void paintComponent(java.awt.Graphics g) {
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(Color.WHITE);
-        g2d.fillRect(x, y, 100, 100);
-        g2d.dispose();
-    }
 
+        g2d.drawImage(bg, 0, 0, getWidth(), getWidth(), null);
+
+        switch (SceneManager.getCurrentScene()) {
+            case MAIN_MENU:
+                mainMenu.render(g2d);
+                break;
+            case INFO:
+                info.render(g2d);
+                break;
+            case NEW_GAME_MENU:
+                break;
+            case LOAD_GAME_MENU:
+                break;
+            case GAME:
+                break;
+            case GAME_OVER:
+                break;
+        }
+    }
 }
