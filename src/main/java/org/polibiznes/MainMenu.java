@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 
 public class MainMenu extends Scennable {
 
-    String[][] options = {{"Nowa gra", "Dołącz do gry", "Info", "Wyjdź"}, {"> Nowa gra <", "> Dołącz do gry <", "> Info <", "> Wyjdź <"}};
+    String[][] options = {{"Dołącz do gry", "Info", "Wyjdź"}, {"> Dołącz do gry <", "> Info <", "> Wyjdź <"}};
     int selectedOption = 0;
 
     public MainMenu(int windowWidth, int windowHeight) {
@@ -16,25 +16,22 @@ public class MainMenu extends Scennable {
 
     public void update(KeyboardHandler keyboardHandler) {
         if (keyboardHandler.isKeyPressed(KeyEvent.VK_UP)) {
-            selectedOption = (selectedOption + 3) % 4;
+            selectedOption = (selectedOption + 2) % 3;
         }
 
         if (keyboardHandler.isKeyPressed(KeyEvent.VK_DOWN)) {
-            selectedOption = (selectedOption + 1) % 4;
+            selectedOption = (selectedOption + 1) % 3;
         }
 
         if (keyboardHandler.isKeyPressed(KeyEvent.VK_ENTER)) {
             switch (selectedOption) {
                 case 0:
-                    SceneManager.changeScene(Scenes.NEW_GAME_MENU);
-                    break;
-                case 1:
                     SceneManager.changeScene(Scenes.LOAD_GAME_MENU);
                     break;
-                case 2:
+                case 1:
                     SceneManager.changeScene(Scenes.INFO);
                     break;
-                case 3:
+                case 2:
                     System.exit(0);
                     break;
             }
@@ -53,7 +50,7 @@ public class MainMenu extends Scennable {
         g2d.setFont(font);
         metrics = g2d.getFontMetrics(font);
         for (int i = 0; i < options[0].length; i++) {
-            g2d.drawString(options[i == selectedOption ? 1 : 0][i], windowWidth / 2 - metrics.stringWidth(options[i == selectedOption ? 1 : 0][i]) / 2, windowHeight / 2 + i * 75);
+            g2d.drawString(options[i == selectedOption ? 1 : 0][i], windowWidth / 2 - metrics.stringWidth(options[i == selectedOption ? 1 : 0][i]) / 2, windowHeight / 2 + (i + 1) * 75);
         }
     }
 }

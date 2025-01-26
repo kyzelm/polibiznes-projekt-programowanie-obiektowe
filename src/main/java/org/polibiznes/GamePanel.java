@@ -20,6 +20,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     MainMenu mainMenu = new MainMenu(WIDTH, HEIGHT);
     Info info = new Info(WIDTH, HEIGHT);
+    LoadGameMenu loadGameMenu = new LoadGameMenu(WIDTH, HEIGHT);
+    Game game = new Game(WIDTH, HEIGHT);
 
     public GamePanel() throws IOException, FontFormatException {
         PacketManager.connect("localhost", 2137);
@@ -75,11 +77,11 @@ public class GamePanel extends JPanel implements Runnable {
             case INFO:
                 info.update(keyboardHandler);
                 break;
-            case NEW_GAME_MENU:
-                break;
             case LOAD_GAME_MENU:
+                loadGameMenu.update(keyboardHandler);
                 break;
             case GAME:
+                game.update(keyboardHandler);
                 break;
             case GAME_OVER:
                 break;
@@ -100,11 +102,11 @@ public class GamePanel extends JPanel implements Runnable {
             case INFO:
                 info.render(g2d);
                 break;
-            case NEW_GAME_MENU:
-                break;
             case LOAD_GAME_MENU:
+                loadGameMenu.render(g2d);
                 break;
             case GAME:
+                game.render(g2d);
                 break;
             case GAME_OVER:
                 break;

@@ -34,4 +34,8 @@ public class KeyboardHandler implements KeyListener {
     public void resetKeys() {
         keys.clear();
     }
+
+    public List<Integer> getKeys() {
+        return keys;
+    }
 }

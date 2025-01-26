@@ -14,6 +14,8 @@ public class Info extends Scennable {
             "Gracz, który jako pierwszy zdobędzie 20 000$",
             "wygrywa grę.",
             "",
+            "",
+            "",
             "Sterowanie:",
             "Strzałki - nawigacja",
             "Enter - potwierdzenie",
