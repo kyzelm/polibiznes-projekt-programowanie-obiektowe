@@ -1,36 +1,52 @@
 package org.polibiznes;
 
 import java.io.*;
-import java.net.Socket;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 
 public class PacketManager {
     private static String address;
     private static int port;
 
-    private static BufferedReader bufferReader;
-    private static PrintWriter printWriter;
+    static DatagramSocket socket;
 
     public static void connect(String address, int port) throws IOException {
         PacketManager.address = address;
         PacketManager.port = port;
 
-        try (Socket socket = new Socket(address, port)) {
-            bufferReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            printWriter = new PrintWriter(socket.getOutputStream(), true);
+        try {
+            socket = new DatagramSocket();
         } catch (IOException e) {
             throw new IOException("Could not connect to the server");
         }
     }
 
     public static void send(String data) {
-        printWriter.println(data);
+        try {
+            byte[] buffer = data.getBytes();
+            DatagramPacket packet = new DatagramPacket(buffer, buffer.length, InetAddress.getByName(address), port);
+            socket.send(packet);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static String receive() {
+    public static String[][] receive() {
         try {
-            return bufferReader.readLine();
+            byte[] buffer = new byte[1024];
+            DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
+            socket.receive(packet);
+            String message = new String(packet.getData(), 0, packet.getLength());
+            String[] lines = message.split("\n");
+            String[][] data = new String[lines.length][];
+            for (int i = 0; i < lines.length; i++) {
+                data[i] = lines[i].split("\t");
+            }
+            return data;
         } catch (IOException e) {
-            return null;
+            e.printStackTrace();
         }
+        return null;
     }
 }

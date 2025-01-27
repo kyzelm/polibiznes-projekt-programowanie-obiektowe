@@ -1,6 +1,7 @@
 package org.polibiznes;
 
 import java.awt.*;
+import java.io.IOException;
 
 public abstract class Scennable {
     int windowWidth;

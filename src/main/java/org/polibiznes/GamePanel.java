@@ -23,7 +23,7 @@ public class GamePanel extends JPanel implements Runnable {
     LoadGameMenu loadGameMenu = new LoadGameMenu(WIDTH, HEIGHT);
     Game game = new Game(WIDTH, HEIGHT);
 
-    public GamePanel() throws IOException, FontFormatException {
+    public GamePanel() throws IOException {
         PacketManager.connect("localhost", 2137);
 
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -69,7 +69,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
 
-    public void update() {
+    public void update()  {
         switch (SceneManager.getCurrentScene()) {
             case MAIN_MENU:
                 mainMenu.update(keyboardHandler);

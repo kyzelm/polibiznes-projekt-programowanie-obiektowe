@@ -2,6 +2,7 @@ package org.polibiznes;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 public class LoadGameMenu extends Scennable {
     String nickname = "";
@@ -19,7 +20,9 @@ public class LoadGameMenu extends Scennable {
             nickname = nickname.substring(0, nickname.length() - 1);
         }
 
-        if (keyboardHandler.isKeyPressed(KeyEvent.VK_ENTER)) {
+        if (keyboardHandler.isKeyPressed(KeyEvent.VK_ENTER) && !nickname.isEmpty()) {
+            PacketManager.send("JOIN\t" + nickname);
+            SceneManager.changeScene(Scenes.GAME);
         }
 
         if (nickname.length() < 15) {
