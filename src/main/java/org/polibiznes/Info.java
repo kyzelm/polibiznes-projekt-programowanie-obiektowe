@@ -17,7 +17,9 @@ public class Info extends Scennable {
             "",
             "",
             "Sterowanie:",
-            "Strzałki - nawigacja",
+            "R - rzut kostkami",
+            "Y - akceptacja transakcji",
+            "N - odmowa transakcji",
             "Enter - potwierdzenie",
             "Escape - powrót"
     };

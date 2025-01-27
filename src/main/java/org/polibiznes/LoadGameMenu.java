@@ -23,6 +23,7 @@ public class LoadGameMenu extends Scennable {
         if (keyboardHandler.isKeyPressed(KeyEvent.VK_ENTER) && !nickname.isEmpty()) {
             PacketManager.send("JOIN\t" + nickname);
             SceneManager.changeScene(Scenes.GAME);
+            nickname = "";
         }
 
         if (nickname.length() < 15) {

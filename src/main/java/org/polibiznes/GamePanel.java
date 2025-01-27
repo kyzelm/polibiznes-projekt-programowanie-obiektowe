@@ -21,6 +21,8 @@ public class GamePanel extends JPanel implements Runnable {
     MainMenu mainMenu = new MainMenu(WIDTH, HEIGHT);
     Info info = new Info(WIDTH, HEIGHT);
     LoadGameMenu loadGameMenu = new LoadGameMenu(WIDTH, HEIGHT);
+    FullLobby fullLobby = new FullLobby(WIDTH, HEIGHT);
+    NickTaken nickTaken = new NickTaken(WIDTH, HEIGHT);
     Game game = new Game(WIDTH, HEIGHT);
 
     public GamePanel() throws IOException {
@@ -54,7 +56,11 @@ public class GamePanel extends JPanel implements Runnable {
             lastDrawTime = currentTime;
 
             if (delta >= 1) {
-                update();
+                try {
+                    update();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
                 keyboardHandler.resetKeys();
                 repaint();
                 delta--;
@@ -69,7 +75,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
 
-    public void update()  {
+    public void update() throws InterruptedException {
         switch (SceneManager.getCurrentScene()) {
             case MAIN_MENU:
                 mainMenu.update(keyboardHandler);
@@ -79,6 +85,12 @@ public class GamePanel extends JPanel implements Runnable {
                 break;
             case LOAD_GAME_MENU:
                 loadGameMenu.update(keyboardHandler);
+                break;
+            case FULL_LOBBY:
+                fullLobby.update(keyboardHandler);
+                break;
+            case NICK_TAKEN:
+                nickTaken.update(keyboardHandler);
                 break;
             case GAME:
                 game.update(keyboardHandler);
@@ -104,6 +116,12 @@ public class GamePanel extends JPanel implements Runnable {
                 break;
             case LOAD_GAME_MENU:
                 loadGameMenu.render(g2d);
+                break;
+            case FULL_LOBBY:
+                fullLobby.render(g2d);
+                break;
+            case NICK_TAKEN:
+                nickTaken.render(g2d);
                 break;
             case GAME:
                 game.render(g2d);

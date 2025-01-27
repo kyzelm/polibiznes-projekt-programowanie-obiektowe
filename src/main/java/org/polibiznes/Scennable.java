@@ -15,6 +15,6 @@ public abstract class Scennable {
         this.windowHeight = windowHeight;
     }
 
-    abstract void update(KeyboardHandler keyboardHandler) throws ClassNotFoundException;
+    abstract void update(KeyboardHandler keyboardHandler) throws InterruptedException;
     abstract void render(Graphics2D g2d);
 }

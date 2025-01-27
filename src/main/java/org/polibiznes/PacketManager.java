@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.util.Arrays;
 
 public class PacketManager {
     private static String address;
@@ -43,6 +44,7 @@ public class PacketManager {
             for (int i = 0; i < lines.length; i++) {
                 data[i] = lines[i].split("\t");
             }
+            System.out.println(Arrays.deepToString(data));
             return data;
         } catch (IOException e) {
             e.printStackTrace();
