@@ -8,13 +8,13 @@ import java.awt.event.KeyEvent;
  */
 public class Info extends Scennable {
     String[] text = {
-            "Polibiznes to gra planszowa dla 2-4 graczy.",
+            "Polibiznes to gra planszowa dla 4 graczy.",
             "Celem gry jest zdobycie jak największego majątku.",
             "Gracze poruszają się po planszy, kupując pola",
             "i pobierając opłaty od innych graczy.",
             "W grze występują różne rodzaje pól, które",
             "mogą zwiększyć majątek gracza lub go zubożyć.",
-            "Gracz, który jako pierwszy zdobędzie 20 000$",
+            "Gracz, który jako pierwszy zdobędzie 10 000$",
             "wygrywa grę.",
             "",
             "",
