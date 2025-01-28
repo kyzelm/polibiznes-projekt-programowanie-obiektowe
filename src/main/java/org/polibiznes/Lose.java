@@ -4,16 +4,16 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 /**
- * Klasa NickTaken dziedziczy po klasie Scennable i jest odpowiedzialna za wyświetlanie informacji o zajętym nicku.
+ * Klasa Lose dziedziczy po klasie Scennable i jest odpowiedzialna za wyświetlanie informacji o przegranej.
  */
-public class NickTaken extends Scennable {
+public class Lose extends Scennable {
     /**
-     * Konstruktor klasy NickTaken.
+     * Konstruktor klasy Lose.
      *
      * @param windowWidth  szerokość okna
      * @param windowHeight wysokość okna
      */
-    public NickTaken(int windowWidth, int windowHeight) {
+    public Lose(int windowWidth, int windowHeight) {
         super(windowWidth, windowHeight);
     }
 
@@ -43,6 +43,6 @@ public class NickTaken extends Scennable {
         font = new Font("Arial", Font.PLAIN, 35);
         g2d.setFont(font);
         metrics = g2d.getFontMetrics(font);
-        g2d.drawString("Nick jest już zajęty", windowWidth / 2 - metrics.stringWidth("Nick jest już zajęty") / 2, windowHeight / 2);
+        g2d.drawString("Niestety nie tym razem :(", windowWidth / 2 - metrics.stringWidth("Niestety nie tym razem :(") / 2, windowHeight / 2);
     }
 }

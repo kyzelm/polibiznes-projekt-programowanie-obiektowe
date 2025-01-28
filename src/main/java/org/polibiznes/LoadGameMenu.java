@@ -4,13 +4,27 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
+/**
+ * Klasa LoadGameMenu dziedziczy po klasie Scennable i jest odpowiedzialna za wyświetlanie menu wczytywania gry.
+ */
 public class LoadGameMenu extends Scennable {
     String nickname = "";
 
+    /**
+     * Konstruktor klasy LoadGameMenu.
+     *
+     * @param windowWidth  szerokość okna
+     * @param windowHeight wysokość okna
+     */
     public LoadGameMenu(int windowWidth, int windowHeight) {
         super(windowWidth, windowHeight);
     }
 
+    /**
+     * Metoda aktualizująca parametry sceny.
+     *
+     * @param keyboardHandler obiekt obsługujący klawiaturę
+     */
     public void update(KeyboardHandler keyboardHandler) {
         if (keyboardHandler.isKeyPressed(KeyEvent.VK_ESCAPE)) {
             SceneManager.changeScene(Scenes.MAIN_MENU);
@@ -35,6 +49,11 @@ public class LoadGameMenu extends Scennable {
         }
     }
 
+    /**
+     * Metoda renderująca scenę.
+     *
+     * @param g2d obiekt klasy Graphics2D
+     */
     public void render(Graphics2D g2d) {
         g2d.setColor(Color.LIGHT_GRAY);
         font = new Font("Arial", Font.PLAIN, 20);

@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
+/**
+ * Główna klasa aplikacji.
+ */
 public class App {
     public static void main(String[] args) throws IOException, FontFormatException {
         JFrame window = new JFrame("Polibiznes");

@@ -1,5 +1,8 @@
 package org.polibiznes;
 
+/**
+ * Enum Scenes przechowuje nazwy scen w grze.
+ */
 public enum Scenes {
     MAIN_MENU,
     INFO,

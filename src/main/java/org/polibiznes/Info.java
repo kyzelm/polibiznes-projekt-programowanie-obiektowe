@@ -3,6 +3,9 @@ package org.polibiznes;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
+/**
+ * Klasa Info dziedziczy po klasie Scennable i jest odpowiedzialna za wyświetlanie informacji o grze.
+ */
 public class Info extends Scennable {
     String[] text = {
             "Polibiznes to gra planszowa dla 2-4 graczy.",
@@ -24,16 +27,27 @@ public class Info extends Scennable {
             "Escape - powrót"
     };
 
+    /**
+     * Konstruktor klasy Info.
+     */
     public Info(int windowWidth, int windowHeight) {
         super(windowWidth, windowHeight);
     }
 
+    /**
+     * Metoda aktualizująca parametry sceny.
+     * @param keyboardHandler obiekt obsługujący klawiaturę
+     */
     public void update(KeyboardHandler keyboardHandler) {
         if (keyboardHandler.isKeyPressed(KeyEvent.VK_ESCAPE)) {
             SceneManager.changeScene(Scenes.MAIN_MENU);
         }
     }
 
+    /**
+     * Metoda renderująca scenę.
+     * @param g2d obiekt klasy Graphics2D
+     */
     public void render(Graphics2D g2d) {
         g2d.setColor(Color.LIGHT_GRAY);
         font = new Font("Arial", Font.PLAIN, 20);

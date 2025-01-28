@@ -3,17 +3,34 @@ package org.polibiznes;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
+/**
+ * Klasa reprezentująca scenę, która wyświetla się, gdy lobby jest już pełne.
+ */
 public class FullLobby extends Scennable {
+
+    /**
+     * Konstruktor klasy FullLobby.
+     * @param windowWidth szerokość okna
+     * @param windowHeight wysokość okna
+     */
     public FullLobby(int windowWidth, int windowHeight) {
         super(windowWidth, windowHeight);
     }
 
+    /**
+     * Metoda aktualizująca parametry sceny.
+     * @param keyboardHandler obiekt obsługujący klawiaturę
+     */
     void update(KeyboardHandler keyboardHandler) {
         if (keyboardHandler.isKeyPressed(KeyEvent.VK_ESCAPE)){
             SceneManager.changeScene(Scenes.MAIN_MENU);
         }
     }
 
+    /**
+     * Metoda renderująca scenę.
+     * @param g2d obiekt klasy Graphics2D
+     */
     void render(Graphics2D g2d) {
         g2d.setColor(Color.LIGHT_GRAY);
         font = new Font("Arial", Font.PLAIN, 20);

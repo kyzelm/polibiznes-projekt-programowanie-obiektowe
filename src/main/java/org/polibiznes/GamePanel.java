@@ -6,6 +6,9 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Klasa reprezentująca panel gry.
+ */
 public class GamePanel extends JPanel implements Runnable {
 
     final static int WIDTH = 1200;
@@ -24,7 +27,13 @@ public class GamePanel extends JPanel implements Runnable {
     FullLobby fullLobby = new FullLobby(WIDTH, HEIGHT);
     NickTaken nickTaken = new NickTaken(WIDTH, HEIGHT);
     Game game = new Game(WIDTH, HEIGHT);
+    Win win = new Win(WIDTH, HEIGHT);
+    Lose lose = new Lose(WIDTH, HEIGHT);
 
+    /**
+     * Konstruktor klasy GamePanel.
+     * @throws IOException wyjątek w przypadku błędu odczytu pliku
+     */
     public GamePanel() throws IOException {
         PacketManager.connect("localhost", 2137);
 
@@ -38,6 +47,9 @@ public class GamePanel extends JPanel implements Runnable {
         gameThread.start();
     }
 
+    /**
+     * Metoda uruchamiająca główną pętlę gry.
+     */
     @Override
     public void run() {
 
@@ -75,6 +87,10 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
 
+    /**
+     * Metoda aktualizująca parametry aktywnej sceny.
+     * @throws InterruptedException wyjątek w przypadku błędu w obsłudze wątku
+     */
     public void update() throws InterruptedException {
         switch (SceneManager.getCurrentScene()) {
             case MAIN_MENU:
@@ -95,11 +111,19 @@ public class GamePanel extends JPanel implements Runnable {
             case GAME:
                 game.update(keyboardHandler);
                 break;
+            case WIN_GAME:
+                win.update(keyboardHandler);
+                break;
             case GAME_OVER:
+                lose.update(keyboardHandler);
                 break;
         }
     }
 
+    /**
+     * Metoda rysująca aktywną scenę.
+     * @param g obiekt klasy Graphics
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -126,7 +150,11 @@ public class GamePanel extends JPanel implements Runnable {
             case GAME:
                 game.render(g2d);
                 break;
+            case WIN_GAME:
+                win.render(g2d);
+                break;
             case GAME_OVER:
+                lose.render(g2d);
                 break;
         }
     }

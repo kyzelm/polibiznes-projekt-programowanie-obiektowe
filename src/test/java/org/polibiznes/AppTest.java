@@ -1,38 +1,24 @@
 package org.polibiznes;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.jupiter.api.Test;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
+import java.awt.*;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class AppTest {
+    @Test
+    void testGetColor() {
+        Color expected = Color.RED;
+        assertEquals(expected, Game.colorBasedOnPlayer("1"));
+        assertNotEquals(expected, Game.colorBasedOnPlayer("2"));
     }
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
-
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+    @Test
+    void testKeyboardClear() {
+        KeyboardHandler keyboardHandler = new KeyboardHandler();
+        keyboardHandler.resetKeys();
+        assertTrue(keyboardHandler.getKeys().isEmpty());
+        assertFalse(keyboardHandler.isKeyPressed(1));
     }
 }

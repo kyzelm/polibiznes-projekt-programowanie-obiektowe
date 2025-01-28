@@ -5,6 +5,9 @@ import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Enumeracja reprezentująca możliwe stany gracza względem serwera.
+ */
 enum PlayerState {
     WAITING, ROLLING, BUYING, BUILDING
 }
@@ -16,11 +19,21 @@ public class Game extends Scennable {
     int roll1 = 0;
     int roll2 = 0;
 
+    /**
+     * Konstruktor klasy Game.
+     * @param windowWidth szerokość okna
+     * @param windowHeight wysokość okna
+     */
     public Game(int windowWidth, int windowHeight) {
         super(windowWidth, windowHeight);
 
     }
 
+    /**
+     * Metoda aktualizująca parametry sceny.
+     * @param keyboardHandler obiekt obsługujący klawiaturę
+     * @throws InterruptedException
+     */
     void update(KeyboardHandler keyboardHandler) throws InterruptedException {
         if (playerState == PlayerState.WAITING) {
             gameData = PacketManager.receive();
@@ -74,6 +87,10 @@ public class Game extends Scennable {
         }
     }
 
+    /**
+     * Metoda renderująca scenę.
+     * @param g2d obiekt klasy Graphics2D
+     */
     void render(Graphics2D g2d) {
         g2d.setColor(Color.PINK);
         font = new Font("Arial", Font.BOLD, 30);
@@ -288,7 +305,12 @@ public class Game extends Scennable {
         }
     }
 
-    Color colorBasedOnPlayer(String player) {
+    /**
+     * Metoda zwracająca kolor gracza na podstawie jego numeru.
+     * @param player numer gracza
+     * @return kolor gracza
+     */
+    public static Color colorBasedOnPlayer(String player) {
         switch (player) {
             case "1":
                 return Color.RED;

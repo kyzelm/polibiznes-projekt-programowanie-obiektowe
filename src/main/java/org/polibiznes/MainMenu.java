@@ -4,16 +4,29 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-
+/**
+ * Klasa MainMenu dziedziczy po klasie Scennable i jest odpowiedzialna za wyświetlanie menu głównego gry.
+ */
 public class MainMenu extends Scennable {
 
     String[][] options = {{"Dołącz do gry", "Info", "Wyjdź"}, {"> Dołącz do gry <", "> Info <", "> Wyjdź <"}};
     int selectedOption = 0;
 
+    /**
+     * Konstruktor klasy MainMenu.
+     *
+     * @param windowWidth  szerokość okna
+     * @param windowHeight wysokość okna
+     */
     public MainMenu(int windowWidth, int windowHeight) {
         super(windowWidth, windowHeight);
     }
 
+    /**
+     * Metoda aktualizująca parametry sceny.
+     *
+     * @param keyboardHandler obiekt obsługujący klawiaturę
+     */
     public void update(KeyboardHandler keyboardHandler) {
         if (keyboardHandler.isKeyPressed(KeyEvent.VK_UP)) {
             selectedOption = (selectedOption + 2) % 3;
@@ -38,6 +51,11 @@ public class MainMenu extends Scennable {
         }
     }
 
+    /**
+     * Metoda renderująca scenę.
+     *
+     * @param g2d obiekt klasy Graphics2D
+     */
     public void render(Graphics2D g2d) {
         g2d.setColor(Color.PINK);
         font = new Font("Arial", Font.BOLD, 65);

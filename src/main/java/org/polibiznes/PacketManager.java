@@ -6,12 +6,22 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.Arrays;
 
+/**
+ * Klasa PacketManager jest odpowiedzialna za zarządzanie pakietami sieciowymi.
+ */
 public class PacketManager {
     private static String address;
     private static int port;
 
     static DatagramSocket socket;
 
+    /**
+     * Metoda connect łączy z serwerem.
+     *
+     * @param address adres serwera
+     * @param port    port serwera
+     * @throws IOException wyjątek w przypadku niepowodzenia połączenia
+     */
     public static void connect(String address, int port) throws IOException {
         PacketManager.address = address;
         PacketManager.port = port;
@@ -23,6 +33,11 @@ public class PacketManager {
         }
     }
 
+    /**
+     * Metoda send wysyła dane do serwera.
+     *
+     * @param data dane do wysłania
+     */
     public static void send(String data) {
         try {
             byte[] buffer = data.getBytes();
@@ -33,6 +48,11 @@ public class PacketManager {
         }
     }
 
+    /**
+     * Metoda receive odbiera dane od serwera.
+     *
+     * @return dane odebrane od serwera
+     */
     public static String[][] receive() {
         try {
             byte[] buffer = new byte[1024];
